@@ -1,12 +1,21 @@
-import "./global.css"
-import { Text, View } from "react-native";
- 
+import "./global.css";
+import { Text, View, Image } from "react-native";
+import { StatusBar } from "expo-status-bar";
+
+import books from "./src/dummyBooks";
+import { BookListItem } from "./src/component/BookListItem";
+
 export default function App() {
   return (
-    <View className="flex-1 bg-red-500 m-4  items-center justify-center">
-      <Text className="text-xl font-bold text-blue-500">
-        Welcome to Nativewind!
-      </Text>
+    <View className="flex-1 bg-slate-800 justify-center p-4">
+      {/* book row */}
+      <View className="space-y-4">
+        <BookListItem book={books[0]} />
+        <BookListItem book={books[1]} />
+        <BookListItem book={books[2]} />
+      </View>
+
+      <StatusBar style="auto" />
     </View>
   );
 }
