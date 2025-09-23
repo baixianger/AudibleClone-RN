@@ -1,9 +1,9 @@
-import "./global.css";
+import "../../global.css";
 import { View, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import books from "./src/dummyBooks";
-import { BookListItem } from "./src/component/BookListItem";
+import books from "../dummyBooks";
+import { BookListItem } from "../component/BookListItem";
 
 export default function App() {
   return (
