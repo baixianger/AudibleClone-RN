@@ -4,3 +4,4 @@ Tech stacks:
 - Install Nativewind: https://www.nativewind.dev/docs/getting-started/installation
 - Expo router setting: https://docs.expo.dev/router/installation/
 - Clerk: https://clerk.com/docs/quickstarts/expo
+- Expo Audio/Video: https://docs.expo.dev/guides/audio-video/
