@@ -24,16 +24,21 @@ export default function PlaybackBar({
   const onHandleSeek = (event: GestureResponderEvent) => {
     const pressX = event.nativeEvent.locationX;
     const percentage = pressX / width;
-    const seekToSeconds = Math.min(Math.max(percentage * duration, 0), duration);// optional now
+    const seekToSeconds = Math.min(
+      Math.max(percentage * duration, 0),
+      duration
+    ); // optional now
     onSeek(seekToSeconds);
   };
   return (
     <View>
-      <Pressable 
-      className="w-full bg-slate-900 h-2 rounded-full justify-center"
-      onPress={onHandleSeek}
-      onLayout={(event)=>{setWidth(event.nativeEvent.layout.width)}}
-      hitSlop={20}
+      <Pressable
+        className="w-full bg-slate-900 h-2 rounded-full justify-center"
+        onPress={onHandleSeek}
+        onLayout={(event) => {
+          setWidth(event.nativeEvent.layout.width);
+        }}
+        hitSlop={20}
       >
         <View
           className="bg-orange-400 h-full rounded-full"
@@ -47,7 +52,7 @@ export default function PlaybackBar({
       <View className="flex-row justify-between items-center">
         <Text className="text-gray-400">{formatTime(currentTime)}</Text>
         <Text className="text-gray-400">{formatTime(duration)}</Text>
-        </View>
+      </View>
     </View>
   );
 }

@@ -6,14 +6,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PlaybackBar from "@/components/PlaybackBar";
 
 import books from "@/dummyBooks";
+import { usePlayer } from "@/providers/PlayerProvider";
 
 export default function PlayerScreen() {
-  const book = books[1];
-  const player = useAudioPlayer({
-    uri: book.audio_url,
-  });
+  const { player, book } = usePlayer();
   const playerStatus = useAudioPlayerStatus(player);
-
+  if (!book) return null;
   return (
     <SafeAreaView className="flex-1 py-10 gap-y-4">
       <Pressable
@@ -32,10 +30,10 @@ export default function PlayerScreen() {
         <Text className="text-white text-2xl font-bold text-center">
           {book.title}
         </Text>
-        <PlaybackBar 
-        currentTime={playerStatus.currentTime}
-        duration={playerStatus.duration}
-        onSeek={(seconds: number) => player.seekTo(seconds)}
+        <PlaybackBar
+          currentTime={playerStatus.currentTime}
+          duration={playerStatus.duration}
+          onSeek={(seconds: number) => player.seekTo(seconds)}
         />
         <View className="flex-row items-center justify-between mt-8">
           <Ionicons name="play-skip-back" size={24} color="white" />
@@ -44,7 +42,9 @@ export default function PlayerScreen() {
             name={playerStatus.playing ? "pause" : "play"}
             size={50}
             color="white"
-            onPress={() => playerStatus.playing ? player.pause() : player.play()}
+            onPress={() =>
+              playerStatus.playing ? player.pause() : player.play()
+            }
           />
           <Ionicons name="play-forward" size={24} color="white" />
           <Ionicons name="play-skip-forward" size={24} color="white" />
