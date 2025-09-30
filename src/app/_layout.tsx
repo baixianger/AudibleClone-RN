@@ -1,9 +1,12 @@
 import "../../global.css";
 import { Slot } from "expo-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
 import { PlayerProvider } from "@/providers/PlayerProvider";
+
+const queryClient = new QueryClient();
 
 const customizedTheme = {
   ...DarkTheme,
@@ -18,11 +21,13 @@ const customizedTheme = {
 export default function RootLayout() {
   return (
     <ThemeProvider value={customizedTheme}>
-      <ClerkProvider tokenCache={tokenCache}>
-        <PlayerProvider>
-          <Slot />
-        </PlayerProvider>
-      </ClerkProvider>
+      <QueryClientProvider client={queryClient}>
+        <ClerkProvider tokenCache={tokenCache}>
+          <PlayerProvider>
+            <Slot />
+          </PlayerProvider>
+        </ClerkProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
