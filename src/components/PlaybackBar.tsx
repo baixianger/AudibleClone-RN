@@ -24,7 +24,7 @@ export default function PlaybackBar({
   const onHandleSeek = (event: GestureResponderEvent) => {
     const pressX = event.nativeEvent.locationX;
     const percentage = pressX / width;
-    const seekToSeconds = Math.min(Math.max(percentage * duration, 0), duration);
+    const seekToSeconds = Math.min(Math.max(percentage * duration, 0), duration);// optional now
     onSeek(seekToSeconds);
   };
   return (

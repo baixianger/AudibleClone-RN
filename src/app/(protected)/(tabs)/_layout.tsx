@@ -2,6 +2,8 @@ import { Redirect, Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useAuth } from "@clerk/clerk-expo";
 import { ActivityIndicator } from "react-native";
+import { BottomTabBar } from "@react-navigation/bottom-tabs";
+import { FloatingPlayer } from "@/components/FloatingPlayer";
 
 export default function RootLayout() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -13,7 +15,15 @@ export default function RootLayout() {
     return <Redirect href={"/sign-in"} />;
   }
   return (
-    <Tabs screenOptions={{ tabBarShowLabel: false }}>
+    <Tabs 
+    screenOptions={{ tabBarShowLabel: false }}
+    tabBar={(props) => (
+      <>
+        <FloatingPlayer />
+        <BottomTabBar {...props} />
+      </>
+    )}
+    >
       <Tabs.Screen
         name="index"
         options={{

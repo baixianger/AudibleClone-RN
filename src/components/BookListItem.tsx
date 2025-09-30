@@ -28,4 +28,4 @@ function BookListItem({ book }: { book: AudioBookProps }) {
   );
 }
 
-export { BookListItem };
+export { BookListItem, AudioBookProps };
