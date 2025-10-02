@@ -2,14 +2,15 @@ import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import { useEffect } from "react";
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/lib/supabase";
+import { useSupabase } from "@/lib/supabase";
 import { BookListItem } from "@/components/BookListItem";
 
 export default function Discover() {
+  const supabaseClient = useSupabase();
   const { data, error, isLoading } = useQuery({
     queryKey: ["books"],
     queryFn: async () =>
-      supabase
+      supabaseClient
         .from("books")
         .select("*")
         .throwOnError()

@@ -1,14 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
-const supabase = createClient(
-  process.env.EXPO_PUBLIC_SUPABASE_URL,
-  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
-  {
-    // auth: {
-    //   autoRefreshToken: true,
-    //   persistSession: true,
-    //   detectSessionInUrl: false,
-    // },
-  }
-);
+import { useAuth } from "@clerk/clerk-expo";
 
-export { supabase };
+const useSupabase = () => {
+  const { getToken } = useAuth();
+  return createClient(
+    process.env.EXPO_PUBLIC_SUPABASE_URL,
+    process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      accessToken: async () => getToken() ?? null,
+    }
+  );
+};
+export { useSupabase };
